@@ -1,0 +1,133 @@
+{% extends 'app1/index.html' %}
+
+{% block title %}
+Register Page
+{% endblock %}
+
+{% block content %}
+<style>
+    .scoped-content {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f9;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    .scoped-content .container {
+        width: 100%;
+        max-width: 450px;
+        background: #fff;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        position: relative;
+        top: -150px;
+    }
+    .scoped-content h2 {
+        text-align: center;
+        margin-bottom: 1rem;
+        color: #333;
+    }
+    .scoped-content .form-group {
+        margin-bottom: 1.5rem;
+        margin-right: 1.5rem;
+    }
+    .scoped-content label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+        color: #555;
+    }
+    .scoped-content input[type="text"],
+    .scoped-content input[type="email"],
+    .scoped-content input[type="password"] {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 1rem;
+    }
+    .scoped-content input[type="submit"] {
+        width: 35%;
+        padding: 0.75rem;
+        border: none;
+        border-radius: 5px;
+        background-color: #4caf50;
+        color: white;
+        font-size: 1rem;
+        cursor: pointer;
+        display: block;
+        margin: 0 auto;
+    }
+    .scoped-content input[type="submit"]:hover {
+        background-color: #45a049;
+    }
+    .scoped-content .error-message {
+        color: #e74c3c;
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+    .scoped-content .success-message {
+        color: #2ecc71;
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+    .scoped-content .register-link {
+        text-align: center;
+        margin-top: 1rem;
+        font-size: 0.9rem;
+    }
+    .scoped-content .register-link a {
+        color: #3498db;
+        text-decoration: none;
+    }
+    .scoped-content .register-link a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+
+<body>
+    <div class="scoped-content">
+        <div class="container">
+            <h2>Register</h2>
+            <!-- Display error message if 'error' exists in the context -->
+            {% if error %}
+            <p class="error-message">{{ error }}</p>
+            {% endif %}
+            <!-- Display success message if user registered successfully -->
+            {% for message in messages %}
+            <p class="success-message">{{ message }}</p>
+            {% endfor %}
+            <form method="POST" action="">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" id="confirm-password" name="confirm_password" placeholder="Confirm your password" required>
+                </div>
+                <input type="submit" value="Register">
+            </form>
+            <div class="register-link">
+                <p>Already have an account? <a href="{% url 'login' %}">Login here</a>.</p>
+            </div>
+        </div>
+    </div>
+    
+</body>
+
+{% endblock %}
